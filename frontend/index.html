@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Garden</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=9">
+</head>
+<body>
+    <!-- Floating Interactive Avatar -->
+    <div id="interactive-avatar" class="avatar-widget" onclick="pokeAvatar()">
+        <div class="speech-bubble" id="avatar-speech">Ready to grow!</div>
+        <div class="avatar-emoji" id="avatar-emoji">🦉</div>
+    </div>
+
+    <div id="app">
+        <!-- Auth View (Premium Landing Page) -->
+        <div id="auth-view" class="view active auth-landing">
+            <div class="hero-container">
+                <div class="hero-left">
+                    <div class="hero-badge">🌱 Habit Garden</div>
+                    <h1 class="hero-title">Grow Your<br>Best Self.</h1>
+                    <p class="hero-subtitle">Turn your daily behaviors into a beautiful, thriving botanical garden. Plant the seeds of success and watch your life bloom, one habit at a time.</p>
+                    <div class="floating-elements">
+                        <span class="float-item float-1">🍃</span>
+                        <span class="float-item float-2">🌸</span>
+                        <span class="float-item float-3">🪴</span>
+                        <span class="float-item float-4">🦋</span>
+                    </div>
+                </div>
+                
+                <div class="hero-right">
+                    <div class="auth-card glass-panel">
+                        <h2 style="text-align:center; color:var(--text); margin-bottom: 20px;">Welcome Back!</h2>
+                        <div class="auth-tabs">
+                            <button id="tab-login" class="active" onclick="toggleAuth('login')">Login</button>
+                            <button id="tab-register" onclick="toggleAuth('register')">Register</button>
+                        </div>
+                        
+                        <form id="auth-form" onsubmit="handleAuth(event)">
+                            <div class="input-group">
+                                <label>Username</label>
+                                <input type="text" id="username" placeholder="Type your username..." required>
+                            </div>
+                            <div class="input-group">
+                                <label>Password</label>
+                                <input type="password" id="password" placeholder="Type your password..." required>
+                            </div>
+                            <button type="submit" class="btn-primary" id="auth-submit" style="width:100%; margin-top:10px; font-size:1.2rem;">Start Growing 🌿</button>
+                            <div id="auth-error" class="error-msg"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="landscape-waves"></div>
+        </div>
+
+        <!-- Main View (Dashboard) -->
+        <div id="main-view" class="view">
+            <header class="glass-panel">
+                <div class="logo">🌱 Habit Garden</div>
+                <nav>
+                    <button onclick="navigate('dashboard')" class="btn-nav active" id="nav-dashboard">Home</button>
+                    <button onclick="navigate('manager')" class="btn-nav" id="nav-manager">Manage Habits</button>
+                    <button onclick="navigate('stats')" class="btn-nav" id="nav-stats">Stats</button>
+                    <button onclick="logout()" class="btn-secondary">Logout</button>
+                </nav>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div id="page-dashboard" class="page active">
+                <div class="dashboard-layout">
+                    <!-- Left: Habits Checklist -->
+                    <aside class="habits-panel glass-panel">
+                        <h2>Today's Habits</h2>
+                        <div id="habits-list" class="habits-container"></div>
+                    </aside>
+
+                    <!-- Center: Garden -->
+                    <main class="garden-panel">
+                        <div class="garden-background">
+                            <div class="sun-moon">☀️</div>
+                        </div>
+                        <div class="garden-grid" id="garden-grid">
+                            <!-- 12 slots -->
+                        </div>
+                    </main>
+
+                    <!-- Right: Stats Summary -->
+                    <aside class="stats-panel glass-panel">
+                        <h2>Your Progress</h2>
+                        <div class="stat-box">
+                            <span>Level</span>
+                            <strong id="user-level" class="accent-text">1</strong>
+                        </div>
+                        <div class="stat-box">
+                            <span>Total Points</span>
+                            <strong id="user-points">0</strong>
+                        </div>
+                        <h3>Unlocked Plants</h3>
+                        <div id="unlocked-plants" class="unlocked-grid"></div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Manager Content -->
+            <div id="page-manager" class="page">
+                <div class="glass-panel manager-card">
+                    <h2>Manage Habits</h2>
+                    <form id="add-habit-form" onsubmit="handleAddHabit(event)">
+                        <div class="input-row">
+                            <input type="text" id="new-habit-name" placeholder="Habit name" required>
+                            <select id="new-habit-cat">
+                                <option value="💧 Health">💧 Health</option>
+                                <option value="🏃 Fitness">🏃 Fitness</option>
+                                <option value="📚 Study">📚 Study</option>
+                                <option value="😴 Sleep">😴 Sleep</option>
+                                <option value="🧘 Mindfulness">🧘 Mindfulness</option>
+                            </select>
+                            <select id="new-habit-plant" id="plant-select">
+                                <!-- Populated dynamically -->
+                            </select>
+                            <button type="submit" class="btn-primary">Add</button>
+                        </div>
+                    </form>
+                    <div id="manage-habits-list" class="manage-list"></div>
+                </div>
+            </div>
+
+            <!-- Stats Content -->
+            <div id="page-stats" class="page">
+                <div class="glass-panel stats-card">
+                    <h2>Statistics & Dashboard</h2>
+                    <p>Track your daily progress</p>
+                    <div id="heatmap" class="heatmap-grid"></div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button class="btn-secondary" onclick="exportData()">Export Data</button>
+                        <button class="btn-secondary" onclick="document.getElementById('import-file').click()">Import Data</button>
+                        <input type="file" id="import-file" style="display:none" onchange="importData(event)" accept=".json">
+                        <button class="btn-secondary" onclick="exportCSV()">Export CSV Data</button>
+                        <button class="btn-primary" onclick="enableNotifications()">Enable Habit Reminders 🔔</button>
+                    </div>
+                    
+                    <hr style="margin: 20px 0; border: 1px solid #ddd;">
+                    
+                    <h3>Your Interactive Avatar</h3>
+                    <p>Choose your companion to help you track habits!</p>
+                    <div class="avatar-picker-grid" style="display:flex; gap:10px; margin:15px 0; flex-wrap:wrap;">
+                        <button onclick="setAvatar('🦉')" class="btn-secondary">🦉 Owl</button>
+                        <button onclick="setAvatar('🦊')" class="btn-secondary">🦊 Fox</button>
+                        <button onclick="setAvatar('🤖')" class="btn-secondary">🤖 Robot</button>
+                        <button onclick="setAvatar('🧙‍♂️')" class="btn-secondary">🧙‍♂️ Wizard</button>
+                        <button onclick="setAvatar('🐱')" class="btn-secondary">🐱 Cat</button>
+                        <button onclick="setAvatar('🦥')" class="btn-secondary">🦥 Sloth</button>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" id="custom-avatar-input" placeholder="Type custom emoji..." maxlength="5" style="max-width: 200px;">
+                        <button onclick="setCustomAvatar()" class="btn-primary">Set Custom</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="particle-canvas"></canvas>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+[
+    {
+        "habits": [
+            {
+                "category": "💧 Health",
+                "completed_today": false,
+                "completion_dates": [
+                    "2026-04-03"
+                ],
+                "health": 1.0,
+                "id": 1,
+                "longest_streak": 20,
+                "name": "Drink 2L Water",
+                "plant_stage": 5,
+                "plant_type": "rose",
+                "streak": 14
+            },
+            {
+                "category": "🏃 Fitness",
+                "completed_today": false,
+                "completion_dates": [
+                    "2026-04-03"
+                ],
+                "health": 0.8500000238418579,
+                "id": 2,
+                "longest_streak": 5,
+                "name": "Morning Jog",
+                "plant_stage": 2,
+                "plant_type": "sunflower",
+                "streak": 5
+            },
+            {
+                "category": "📚 Study",
+                "completed_today": false,
+                "completion_dates": [],
+                "health": 0.20000000298023224,
+                "id": 3,
+                "longest_streak": 3,
+                "name": "Read 10 Pages",
+                "plant_stage": 1,
+                "plant_type": "rose",
+                "streak": 0
+            }
+        ],
+        "id": 1,
+        "level": 2,
+        "password_hash": "demo_hashed",
+        "token": "tokendemo123",
+        "total_points": 750,
+        "unlocked_plants": [
+            "rose",
+            "sunflower"
+        ],
+        "username": "demo"
+    },
+    {
+        "habits": [
+            {
+                "category": "💧 Health",
+                "completed_today": true,
+                "completion_dates": [
+                    "2026-04-04"
+                ],
+                "health": 1.0,
+                "id": 1,
+                "longest_streak": 1,
+                "name": "waking at 6",
+                "plant_stage": 0,
+                "plant_type": "lily",
+                "streak": 1
+            },
+            {
+                "category": "🏃 Fitness",
+                "completed_today": true,
+                "completion_dates": [
+                    "2026-04-04"
+                ],
+                "health": 1.0,
+                "id": 2,
+                "longest_streak": 1,
+                "name": "waking",
+                "plant_stage": 0,
+                "plant_type": "tulip",
+                "streak": 1
+            },
+            {
+                "category": "💧 Health",
+                "completed_today": true,
+                "completion_dates": [
+                    "2026-04-04"
+                ],
+                "health": 1.0,
+                "id": 3,
+                "longest_streak": 1,
+                "name": "sleep at 11",
+                "plant_stage": 0,
+                "plant_type": "lily",
+                "streak": 1
+            }
+        ],
+        "id": 2,
+        "level": 1,
+        "password_hash": "1234_hashed",
+        "token": "BWfz9U52UexlL2ABXZdxeFDcitLu3aOB",
+        "total_points": 180,
+        "unlocked_plants": [
+            "rose"
+        ],
+        "username": "loki"
+    }
+]
